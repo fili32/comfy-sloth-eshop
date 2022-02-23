@@ -14,8 +14,10 @@ import { useProductsContext } from "./products_context";
 
 const initialState = {
   filtered_products: [],
-  isGridview: true,
   all_products: [],
+  sorted_products: [],
+  isGridview: true,
+  sort: "name_a_z",
 };
 
 const FilterContext = React.createContext();
@@ -29,12 +31,27 @@ export const FilterProvider = ({ children }) => {
   const setGridView = () => {
     dispatch({ type: SET_GRIDVIEW });
   };
+  const updateSort = (e) => {
+    // Just for demostration reasons
+    // const name = e.target.name;
+    const value = e.target.value;
+    dispatch({ type: UPDATE_SORT, payload: value });
+  };
+  const sortProducts = () => {
+    dispatch({ type: SORT_PRODUCTS });
+  };
 
   useEffect(() => {
     dispatch({ type: LOAD_PRODUCTS, payload: products });
   }, [products]);
+
+  useEffect(() => {
+    dispatch({ type: SORT_PRODUCTS });
+  }, [products, state.sort]);
   return (
-    <FilterContext.Provider value={{ ...state, setListView, setGridView }}>
+    <FilterContext.Provider
+      value={{ ...state, setListView, setGridView, updateSort, sortProducts }}
+    >
       {children}
     </FilterContext.Provider>
   );
