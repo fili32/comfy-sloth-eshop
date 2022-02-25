@@ -19,12 +19,25 @@ const Filters = () => {
     updateFilters,
     all_products,
   } = useFilterContext();
-  console.log("filters", category);
   const categories = getUniqueValues(all_products, "category");
   const companies = getUniqueValues(all_products, "company");
   const colors = getUniqueValues(all_products, "colors");
   return (
     <Wrapper>
+      {/* text */}
+      <div className="form-control">
+        <input
+          className="search-input"
+          name="text"
+          onChange={updateFilters}
+          onKeyDown={(e) => {
+            e.key === "Enter" && e.preventDefault();
+          }}
+          type="text"
+          placeholder="Search"
+        ></input>
+      </div>
+      {/* end of text */}
       {/* category */}
       <div className="form-control">
         <h5>category</h5>

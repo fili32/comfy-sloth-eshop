@@ -12,6 +12,7 @@ const ProductList = () => {
       ) : (
         <GridView products={products}>products in grid</GridView>
       )}
+      {products.length <= 0 && <h4>Sorry, there is no such a product</h4>}
     </div>
   );
 };

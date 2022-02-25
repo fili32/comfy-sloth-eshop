@@ -49,20 +49,20 @@ const filter_reducer = (state, action) => {
   }
   if (action.type === UPDATE_FILTERS) {
     const { name, value } = action.payload;
-    console.log("[Reducer:Update_Filters]filters.category", {
-      ...state.filters,
-      [name]: value,
-    });
     return { ...state, filters: { ...state.filters, [name]: value } };
   }
   if (action.type === FILTER_PRODUCTS) {
     const { all_products } = state;
     const { text, category, company, color, price, shipping } = state.filters;
     let tempProducts = [...all_products];
-    console.log("[Reducer:Filter_products]state", state);
     if (category !== "all") {
       tempProducts = tempProducts.filter(
         (product) => product.category === category
+      );
+    }
+    if (text) {
+      tempProducts = tempProducts.filter((product) =>
+        product.name.toLowerCase().includes(text.toLowerCase())
       );
     }
     return { ...state, filtered_products: tempProducts };
