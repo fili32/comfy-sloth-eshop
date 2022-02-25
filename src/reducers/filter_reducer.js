@@ -11,10 +11,14 @@ import {
 
 const filter_reducer = (state, action) => {
   if (action.type === LOAD_PRODUCTS) {
+    let maxPrice = action.payload.map((p) => p.price);
+    maxPrice = Math.max(...maxPrice);
+
     return {
       ...state,
       all_products: [...action.payload],
       filtered_products: [...action.payload],
+      filters: { ...state.filters, max_price: maxPrice, price: maxPrice },
     };
   }
   if (action.type === SET_GRIDVIEW) {
@@ -28,28 +32,40 @@ const filter_reducer = (state, action) => {
   }
   if (action.type === SORT_PRODUCTS) {
     const { sort, filtered_products } = state;
-    let tempProducts = [];
+    let tempProducts = [...filtered_products];
     if (sort === "price_lowest") {
-      tempProducts = filtered_products
-        .slice()
-        .sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      tempProducts = tempProducts.sort((a, b) => a.price - b.price);
     }
     if (sort === "price_highest") {
-      tempProducts = filtered_products
-        .slice()
-        .sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      tempProducts = tempProducts.sort((a, b) => b.price - a.price);
     }
     if (sort === "name_a_z") {
-      tempProducts = filtered_products.sort((a, b) =>
-        a.name.localeCompare(b.name)
-      );
+      tempProducts = tempProducts.sort((a, b) => a.name.localeCompare(b.name));
     }
     if (sort === "name_z_a") {
-      tempProducts = filtered_products.sort((a, b) =>
-        b.name.localeCompare(a.name)
+      tempProducts = tempProducts.sort((a, b) => b.name.localeCompare(a.name));
+    }
+    return { ...state, filtered_products: tempProducts };
+  }
+  if (action.type === UPDATE_FILTERS) {
+    const { name, value } = action.payload;
+    console.log("[Reducer:Update_Filters]filters.category", {
+      ...state.filters,
+      [name]: value,
+    });
+    return { ...state, filters: { ...state.filters, [name]: value } };
+  }
+  if (action.type === FILTER_PRODUCTS) {
+    const { all_products } = state;
+    const { text, category, company, color, price, shipping } = state.filters;
+    let tempProducts = [...all_products];
+    console.log("[Reducer:Filter_products]state", state);
+    if (category !== "all") {
+      tempProducts = tempProducts.filter(
+        (product) => product.category === category
       );
     }
-    return { ...state, sorted_products: tempProducts };
+    return { ...state, filtered_products: tempProducts };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
 };
