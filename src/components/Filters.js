@@ -24,40 +24,63 @@ const Filters = () => {
   const colors = getUniqueValues(all_products, "colors");
   return (
     <Wrapper>
-      {/* text */}
-      <div className="form-control">
-        <input
-          className="search-input"
-          name="text"
-          onChange={updateFilters}
-          onKeyDown={(e) => {
-            e.key === "Enter" && e.preventDefault();
-          }}
-          type="text"
-          placeholder="Search"
-        ></input>
-      </div>
-      {/* end of text */}
-      {/* category */}
-      <div className="form-control">
-        <h5>category</h5>
-        <div>
-          {categories.map((c, index) => {
-            return (
-              <button
-                key={index}
-                onClick={updateFilters}
-                type="button"
-                name="category"
-                className={`${category === c.toLowerCase() ? "active" : null}`}
-              >
-                {c}
-              </button>
-            );
-          })}
+      <form onSubmit={(e) => e.preventDefault()}>
+        {/* text */}
+        <div className="form-control">
+          <input
+            className="search-input"
+            name="text"
+            onChange={updateFilters}
+            type="text"
+            placeholder="Search"
+          ></input>
         </div>
-      </div>
-      {/* end of category */}
+        {/* end of text */}
+        {/* category */}
+        <div className="form-control">
+          <h5>category</h5>
+          <div>
+            {categories.map((c, index) => {
+              return (
+                <button
+                  key={index}
+                  onClick={updateFilters}
+                  type="button"
+                  name="category"
+                  className={`${
+                    category === c.toLowerCase() ? "active" : null
+                  }`}
+                >
+                  {c}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+        {/* end of category */}
+        {/*company */}
+        <div className="form-control">
+          <select
+            name="company"
+            htmlFor="company"
+            id="company"
+            onClick={updateFilters}
+          >
+            {companies.map((comp, index) => {
+              return (
+                <option
+                  key={index}
+                  value={comp}
+                  className={`${comp === company ? "active" : null}`}
+                >
+                  {comp}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        {/* end of company */}
+      </form>
     </Wrapper>
   );
 };

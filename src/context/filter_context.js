@@ -42,7 +42,7 @@ export const FilterProvider = ({ children }) => {
   useEffect(() => {
     dispatch({ type: FILTER_PRODUCTS });
     dispatch({ type: SORT_PRODUCTS });
-  }, [state.sort, state.filters]);
+  }, [products, state.sort, state.filters]);
 
   const setListView = () => {
     dispatch({ type: SET_LISTVIEW });
@@ -51,8 +51,6 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: SET_GRIDVIEW });
   };
   const updateSort = (e) => {
-    // Just for demostration reasons
-    // const name = e.target.name;
     const value = e.target.value;
     dispatch({ type: UPDATE_SORT, payload: value });
   };
