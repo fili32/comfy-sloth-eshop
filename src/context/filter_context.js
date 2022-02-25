@@ -61,6 +61,7 @@ export const FilterProvider = ({ children }) => {
     if (name === "category") {
       value = e.target.textContent;
     }
+    console.log("color", { name, value });
     dispatch({
       type: UPDATE_FILTERS,
       payload: { name, value },

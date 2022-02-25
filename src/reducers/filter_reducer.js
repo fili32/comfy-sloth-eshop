@@ -70,6 +70,11 @@ const filter_reducer = (state, action) => {
         (product) => product.company === company
       );
     }
+    if (color !== "all") {
+      tempProducts = tempProducts.filter((product) =>
+        product.colors.includes(color)
+      );
+    }
     return { ...state, filtered_products: tempProducts };
   }
   throw new Error(`No Matching "${action.type}" - action type`);

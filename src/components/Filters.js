@@ -60,11 +60,13 @@ const Filters = () => {
         {/* end of category */}
         {/*company */}
         <div className="form-control">
+          <h5>Company</h5>
           <select
             name="company"
             htmlFor="company"
-            id="company"
-            onClick={updateFilters}
+            className="company"
+            value={company}
+            onChange={updateFilters}
           >
             {companies.map((comp, index) => {
               return (
@@ -80,6 +82,27 @@ const Filters = () => {
           </select>
         </div>
         {/* end of company */}
+        {/* colors */}
+        <div className="form-control colors">
+          {colors.map((col, index) => {
+            return (
+              <button
+                key={index}
+                onClick={updateFilters}
+                type="button"
+                name="color"
+                value={col}
+                className={`${col === "all" ? "all-btn" : "color-btn"} ${
+                  color === col ? "active" : null
+                }`}
+                style={{ backgroundColor: col }}
+              >
+                {col === "all" ? "All" : color === col ? <FaCheck /> : null}
+              </button>
+            );
+          })}
+        </div>
+        {/* end of colors */}
       </form>
     </Wrapper>
   );
