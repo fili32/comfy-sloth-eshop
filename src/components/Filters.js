@@ -83,24 +83,27 @@ const Filters = () => {
         </div>
         {/* end of company */}
         {/* colors */}
-        <div className="form-control colors">
-          {colors.map((col, index) => {
-            return (
-              <button
-                key={index}
-                onClick={updateFilters}
-                type="button"
-                name="color"
-                value={col}
-                className={`${col === "all" ? "all-btn" : "color-btn"} ${
-                  color === col ? "active" : null
-                }`}
-                style={{ backgroundColor: col }}
-              >
-                {col === "all" ? "All" : color === col ? <FaCheck /> : null}
-              </button>
-            );
-          })}
+        <div className="form-control">
+          <h5>colors</h5>
+          <div className="colors">
+            {colors.map((col, index) => {
+              return (
+                <button
+                  key={index}
+                  onClick={updateFilters}
+                  type="button"
+                  name="color"
+                  value={col}
+                  className={`${col === "all" ? "all-btn" : "color-btn"} ${
+                    color === col ? "active" : null
+                  }`}
+                  style={{ backgroundColor: col }}
+                >
+                  {col === "all" ? "All" : color === col ? <FaCheck /> : null}
+                </button>
+              );
+            })}
+          </div>
         </div>
         {/* end of colors */}
       </form>
