@@ -9,18 +9,27 @@ import {
 } from "../actions";
 
 const initialState = {
-  addToCart: false,
-  removeOfCart: false,
-  products_in_cart: [],
-  single_product_in_cart: {},
+  cart: [],
+  product_in_cart: {},
+  total_items: 0,
+  total_amount: 0,
+  shipping_fee: 534,
 };
 
 const CartContext = React.createContext();
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const addToCart = ({ id, mainColor, amount, product }) => {
+    dispatch({
+      type: ADD_TO_CART,
+      payload: { id, mainColor, amount, product },
+    });
+  };
   return (
-    <CartContext.Provider value="cart context">{children}</CartContext.Provider>
+    <CartContext.Provider value={{ ...state, addToCart }}>
+      {children}
+    </CartContext.Provider>
   );
 };
 // make sure use

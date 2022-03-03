@@ -18,6 +18,7 @@ const Filters = () => {
     },
     updateFilters,
     all_products,
+    clearFilters,
   } = useFilterContext();
   const categories = getUniqueValues(all_products, "category");
   const companies = getUniqueValues(all_products, "company");
@@ -33,7 +34,8 @@ const Filters = () => {
             onChange={updateFilters}
             type="text"
             placeholder="Search"
-          ></input>
+            value={text}
+          />
         </div>
         {/* end of text */}
         {/* category */}
@@ -106,7 +108,35 @@ const Filters = () => {
           </div>
         </div>
         {/* end of colors */}
+        {/*price*/}
+        <div className="form-control">
+          <h5>price</h5>
+          <p className="price">{formatPrice(price)}</p>
+          <input
+            type="range"
+            name="price"
+            min={min_price}
+            max={max_price}
+            value={price}
+            onChange={updateFilters}
+          />
+        </div>
+        {/*end of price*/}
+        {/*shipping*/}
+        <div className="form-control shipping">
+          <label> Free shipping </label>
+          <input
+            type="checkbox"
+            name="shipping"
+            checked={shipping}
+            onChange={updateFilters}
+          />
+        </div>
+        {/*end of shipping*/}
       </form>
+      <button className="clear-btn" onClick={clearFilters}>
+        clear filters
+      </button>
     </Wrapper>
   );
 };
