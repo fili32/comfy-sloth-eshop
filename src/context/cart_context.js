@@ -10,7 +10,6 @@ import {
 
 const initialState = {
   cart: [],
-  product_in_cart: {},
   total_items: 0,
   total_amount: 0,
   shipping_fee: 534,
@@ -20,14 +19,20 @@ const CartContext = React.createContext();
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
-  const addToCart = ({ id, mainColor, amount, product }) => {
+  const addToCart = (id, mainColor, amount, product) => {
     dispatch({
       type: ADD_TO_CART,
       payload: { id, mainColor, amount, product },
     });
   };
+  const toggleAmount = ({ id, decOrInc }) => {
+    dispatch({
+      type: TOGGLE_CART_ITEM_AMOUNT,
+      payload: { id, decOrInc },
+    });
+  };
   return (
-    <CartContext.Provider value={{ ...state, addToCart }}>
+    <CartContext.Provider value={{ ...state, addToCart, toggleAmount }}>
       {children}
     </CartContext.Provider>
   );

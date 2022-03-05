@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { FaCheck } from "react-icons/fa";
@@ -42,10 +42,9 @@ const AddToCart = ({ product }) => {
         <Link
           to="/cart"
           className="btn"
-          name="addToCart"
-          onClick={() => addToCart({ id, mainColor, amount, product })}
+          onClick={() => addToCart(id, mainColor, amount, product)}
         >
-          ADD TO CART
+          add to cart
         </Link>
       </div>
     </Wrapper>
