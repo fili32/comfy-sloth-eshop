@@ -23,7 +23,9 @@ const CartContent = () => {
         <Link to="/products" className="link-btn" type="button">
           Continue Shopping
         </Link>
-        <button className="link-btn clear-btn">Clear Shopping Cart</button>
+        <button type="button" className="link-btn clear-btn">
+          Clear Shopping Cart
+        </button>
       </div>
       <CartTotals />
       <Link to="/login" type="button" className="btn">
