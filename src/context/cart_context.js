@@ -49,13 +49,24 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
   };
+  const countCartTotals = () => {
+    dispatch({ type: COUNT_CART_TOTALS });
+  };
   useEffect(() => {
+    countCartTotals();
     localStorage.setItem("cart", JSON.stringify(state.cart));
   }, [state.cart]);
 
   return (
     <CartContext.Provider
-      value={{ ...state, addToCart, toggleAmount, removeItem, clearCart }}
+      value={{
+        ...state,
+        addToCart,
+        toggleAmount,
+        removeItem,
+        clearCart,
+        countCartTotals,
+      }}
     >
       {children}
     </CartContext.Provider>

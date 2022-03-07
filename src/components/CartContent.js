@@ -32,9 +32,6 @@ const CartContent = () => {
         </button>
       </div>
       <CartTotals />
-      <Link to="/login" type="button" className="btn">
-        Login
-      </Link>
     </Wrapper>
   );
 };
