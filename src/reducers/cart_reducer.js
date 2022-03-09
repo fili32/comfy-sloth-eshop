@@ -60,23 +60,6 @@ const cart_reducer = (state, action) => {
       }
     });
     return { ...state, cart: tempCart };
-
-    // const tempCart = state.cart.map((cartItem) => {
-    //   let newAmount;
-    //   if (cartItem.id === id) {
-    //     const { amount, max } = cartItem;
-    //     if (decOrInc === "dec") {
-    //       newAmount = amount > 1 ? amount - 1 : amount;
-    //     }
-    //     if (decOrInc === "inc") {
-    //       newAmount = amount <= max ? amount + 1 : amount;
-    //     }
-    //   }
-    //   return {
-    //     ...cartItem,
-    //     amount: newAmount,
-    //   };
-    // });
   }
   if (action.type === REMOVE_CART_ITEM) {
     const id = action.payload;
@@ -87,13 +70,19 @@ const cart_reducer = (state, action) => {
     return { ...state, cart: [] };
   }
   if (action.type === COUNT_CART_TOTALS) {
-    let subtotal = [];
-    subtotal = state.cart.map((cartItem) => {
-      const { amount, price } = cartItem;
-      return amount * price;
-    });
-    let subTotalOfAll = subtotal.reduce((a, b) => a + b, 0);
-    return { ...state, total_amount: subTotalOfAll };
+    const { total_amount, total_items } = state.cart.reduce(
+      (total, item) => {
+        const { amount, price } = item;
+        total.total_items += amount;
+        total.total_amount += amount * price;
+        return {
+          total_amount: total.total_amount,
+          total_items: total.total_items,
+        };
+      },
+      { total_amount: 0, total_items: 0 }
+    );
+    return { ...state, total_amount, total_items };
   }
   throw new Error(`No Matching "${action.type}" - action type`);
 };

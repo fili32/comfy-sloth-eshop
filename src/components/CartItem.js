@@ -12,12 +12,13 @@ const CartItem = ({ id, name, mainColor, amount, image, price, max }) => {
     <Wrapper>
       <div className="title">
         <img src={image} alt={name} />
-        <span>
+        <div>
           <h5>{name}</h5>
-          <span className="color">
+          <p className="color">
             Color: <span style={{ backgroundColor: mainColor }}></span>
-          </span>
-        </span>
+          </p>
+          <h5 className="price-small">{formatPrice(price)}</h5>
+        </div>
       </div>
       <h5 className="price">{formatPrice(price)}</h5>
       <AmountButtons

@@ -49,11 +49,9 @@ export const CartProvider = ({ children }) => {
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
   };
-  const countCartTotals = () => {
-    dispatch({ type: COUNT_CART_TOTALS });
-  };
+
   useEffect(() => {
-    countCartTotals();
+    dispatch({ type: COUNT_CART_TOTALS });
     localStorage.setItem("cart", JSON.stringify(state.cart));
   }, [state.cart]);
 
@@ -65,7 +63,6 @@ export const CartProvider = ({ children }) => {
         toggleAmount,
         removeItem,
         clearCart,
-        countCartTotals,
       }}
     >
       {children}
