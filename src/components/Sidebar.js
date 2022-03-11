@@ -41,7 +41,7 @@ const Sidebar = () => {
             </li>
           )}
         </ul>
-        <div class="cart-btn-wrapper">
+        <div className="cart-btn-wrapper">
           <CartButtons />
         </div>
       </aside>

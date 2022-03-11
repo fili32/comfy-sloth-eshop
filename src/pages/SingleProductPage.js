@@ -25,6 +25,7 @@ const SingleProductPage = () => {
   const history = useHistory();
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`);
+    // eslint-disable-next-line
   }, [id]);
 
   useEffect(() => {
@@ -33,6 +34,7 @@ const SingleProductPage = () => {
         history.push("/");
       }, 3000);
     }
+    // eslint-disable-next-line
   }, [error]);
 
   if (loading) {
@@ -73,7 +75,7 @@ const SingleProductPage = () => {
             </p>
             <p className="info">
               <span>SKU:</span>
-              {id}
+              {sku}
             </p>
             <p className="info">
               <span>Brand:</span>

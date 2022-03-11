@@ -28,7 +28,11 @@ const CartButtons = () => {
           Logout <FaUserMinus />
         </button>
       ) : (
-        <button className="auth-btn" onClick={() => loginWithRedirect()}>
+        <button
+          type="button"
+          className="auth-btn"
+          onClick={() => loginWithRedirect()}
+        >
           Login <FaUserPlus />
         </button>
       )}
@@ -86,14 +90,6 @@ const Wrapper = styled.div`
     letter-spacing: var(--spacing);
     svg {
       margin-left: 5px;
-    }
-  }
-  .cart-btn-wrapper {
-    display: none;
-  }
-  @media (min-width: 992px) {
-    .cart-btn-wrapper {
-      display: grid;
     }
   }
 `;

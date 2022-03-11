@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import _ from "lodash";
+
 import { BsStarFill, BsStarHalf, BsStar } from "react-icons/bs";
 const Stars = ({ stars, reviews }) => {
   const tempStars = Array.from({ length: 5 }, (_, index) => {

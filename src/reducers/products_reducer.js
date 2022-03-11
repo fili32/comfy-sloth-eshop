@@ -1,4 +1,4 @@
-import axios from "axios";
+// import axios from "axios";
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,
@@ -43,8 +43,6 @@ const products_reducer = (state, action) => {
   if (action.type === GET_SINGLE_PRODUCT_ERROR) {
     return { ...state, product_loading: false, product_error: true };
   }
-
-  return state;
   throw new Error(`No Matching "${action.type}" - action type`);
 };
 

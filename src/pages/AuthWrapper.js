@@ -2,14 +2,22 @@ import React from "react";
 import { useAuth0 } from "@auth0/auth0-react";
 import styled from "styled-components";
 
-const AuthWrapper = () => {
+const AuthWrapper = ({ children }) => {
   const { isLoading, error } = useAuth0();
-  return (
+
+  if (isLoading) {
     <Wrapper>
-      {isLoading && <div> Loading </div>}
-      {error && <div>Oops... {error.message}</div>}
-    </Wrapper>
-  );
+      <h1> Loading... </h1>{" "}
+    </Wrapper>;
+  }
+
+  if (error) {
+    <Wrapper>
+      <h1>Oops... {error.message}</h1>{" "}
+    </Wrapper>;
+  }
+
+  return <>{children}</>;
 };
 
 const Wrapper = styled.section`
