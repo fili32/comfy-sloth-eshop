@@ -1,4 +1,3 @@
-// import axios from "axios";
 import {
   SIDEBAR_OPEN,
   SIDEBAR_CLOSE,

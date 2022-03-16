@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-// import { SIDEBAR_CLOSE } from "../actions";
 import { Filters, ProductList, Sort, PageHero } from "../components";
 
 const ProductsPage = () => {
